@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Catalog from "./pages/Catalog";
-import Cart from "./pages/Cart"; // 👈 додай
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Catalog />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route
           path="*"

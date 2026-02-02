@@ -36,7 +36,6 @@ export default function Catalog() {
   }, [q, category, sort]);
 
   function onAdd(product) {
-    // поки заглушка — далі зробимо нормальний cart
     alert(`Added: ${product.name}`);
   }
 

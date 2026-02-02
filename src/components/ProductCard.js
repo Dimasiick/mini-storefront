@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./ProductCard.css";
 
 export default function ProductCard({ product, onAdd }) {
@@ -38,9 +39,9 @@ export default function ProductCard({ product, onAdd }) {
           >
             Add to cart
           </button>
-          <button className="btn" onClick={() => alert("Detail page next 😉")}>
+          <Link className="btn" to={`/products/${product.id}`}>
             View
-          </button>
+          </Link>
         </div>
       </div>
     </article>
