@@ -1,9 +1,126 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #111827;
+  --primaryText: #ffffff;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-main {
-  padding: 24px;
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial;
+  background: var(--bg);
+  color: var(--text);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 10px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.skip-link:focus {
+  left: 10px;
+  z-index: 9999;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+}
+.badge--ok {
+  color: #065f46;
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+}
+.badge--out {
+  color: #991b1b;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 18px;
+  align-items: center;
+}
+.input,
+.select {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  outline: none;
+}
+.input {
+  min-width: 240px;
+}
+.select {
+  min-width: 180px;
+}
+.btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--primary);
+  color: var(--primaryText);
+  border-color: transparent;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.h1 {
+  font-size: 32px;
+  margin: 8px 0 6px;
+}
+.sub {
+  color: var(--muted);
+  margin: 0 0 10px;
 }

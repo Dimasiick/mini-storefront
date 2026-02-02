@@ -1,23 +1,48 @@
 import "./ProductCard.css";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onAdd }) {
+  const inStock = product.stock > 0;
+
   return (
-    <div className="card">
-      <img src={product.image} alt={product.name} />
+    <article className="card">
+      <div className="card-media">
+        <img src={product.image} alt={product.name} loading="lazy" />
+      </div>
 
       <div className="card-body">
-        <h3>{product.name}</h3>
-        <p className="price">${product.price}</p>
+        <h3 className="card-title">{product.name}</h3>
+        <p className="card-desc">{product.description}</p>
 
-        <div className="meta">
-          <span>⭐ {product.rating}</span>
-          <span className={product.stock > 0 ? "in" : "out"}>
-            {product.stock > 0 ? "In stock" : "Out"}
-          </span>
+        <div className="row">
+          <div className="price">${product.price}</div>
+          <div
+            className="rating"
+            aria-label={`Rating ${product.rating} out of 5`}
+          >
+            ⭐ {product.rating}
+          </div>
         </div>
 
-        <button disabled={product.stock === 0}>Add to cart</button>
+        <div className="row" style={{ marginTop: 10 }}>
+          <span className={`badge ${inStock ? "badge--ok" : "badge--out"}`}>
+            {inStock ? "In stock" : "Out of stock"}
+          </span>
+          <span className="badge">{product.category}</span>
+        </div>
+
+        <div className="card-actions">
+          <button
+            className="btn btn--primary"
+            disabled={!inStock}
+            onClick={() => onAdd?.(product)}
+          >
+            Add to cart
+          </button>
+          <button className="btn" onClick={() => alert("Detail page next 😉")}>
+            View
+          </button>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
