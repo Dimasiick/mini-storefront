@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 
-export default function Catalog() {
+export default function Catalog({ onAddToCart }) {
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("none");
@@ -34,10 +34,6 @@ export default function Catalog() {
 
     return items;
   }, [q, category, sort]);
-
-  function onAdd(product) {
-    alert(`Added: ${product.name}`);
-  }
 
   return (
     <main id="main" className="container">
@@ -92,7 +88,7 @@ export default function Catalog() {
       ) : (
         <section className="grid" aria-label="Product list">
           {filtered.map((p) => (
-            <ProductCard key={p.id} product={p} onAdd={onAdd} />
+            <ProductCard key={p.id} product={p} onAdd={onAddToCart} />
           ))}
         </section>
       )}

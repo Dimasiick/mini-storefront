@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-export default function Header() {
-  const cartCount = 0; // поки що заглушка
-  const userEmail = null; // заглушка під login
-
+export default function Header({ cartCount }) {
   return (
     <header className="header">
       <a className="skip-link" href="#main">
@@ -29,7 +26,7 @@ export default function Header() {
           </Link>
 
           <Link className="btn" to="/login">
-            {userEmail ? "Account" : "Login"}
+            {/* {userEmail ? "Account" : "Login"} */}
           </Link>
         </nav>
       </div>
