@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import products from "../data/products";
+import "./ProductDetail.css";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -25,38 +26,14 @@ export default function ProductDetail() {
         ← Back
       </Link>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 20,
-          marginTop: 16,
-        }}
-      >
-        <img
-          src={product.image}
-          alt={product.name}
-          style={{
-            width: "100%",
-            borderRadius: 18,
-            border: "1px solid var(--border)",
-          }}
-        />
+      <div className="pd-grid">
+        <img className="pd-image" src={product.image} alt={product.name} />
 
-        <div>
-          <h1 className="h1" style={{ marginTop: 0 }}>
-            {product.name}
-          </h1>
+        <div className="pd-info">
+          <h1 className="h1 pd-title">{product.name}</h1>
           <p className="sub">{product.description}</p>
 
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              margin: "12px 0",
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="pd-badges">
             <span className={`badge ${inStock ? "badge--ok" : "badge--out"}`}>
               {inStock ? "In stock" : "Out of stock"}
             </span>
@@ -64,9 +41,7 @@ export default function ProductDetail() {
             <span className="badge">⭐ {product.rating}</span>
           </div>
 
-          <div style={{ fontSize: 28, fontWeight: 900, margin: "8px 0 16px" }}>
-            ${product.price}
-          </div>
+          <div className="pd-price">${product.price}</div>
 
           <button className="btn btn--primary" disabled={!inStock}>
             Add to cart

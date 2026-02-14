@@ -1,0 +1,42 @@
+.pd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 16px;
+  align-items: start;
+}
+
+.pd-image {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.pd-info {
+  min-width: 0;
+}
+
+.pd-title {
+  margin-top: 0;
+}
+
+.pd-badges {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.pd-price {
+  font-size: 28px;
+  font-weight: 900;
+  margin: 8px 0 16px;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .pd-grid {
+    grid-template-columns: 1fr;
+  }
+}

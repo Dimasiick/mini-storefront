@@ -10,7 +10,7 @@ export default function Header({ cartCount }) {
 
       <div className="header-inner">
         <Link className="brand" to="/">
-          Mini StoreCart
+          MiniStore Cart
         </Link>
 
         <nav className="nav" aria-label="Main navigation">
@@ -25,9 +25,7 @@ export default function Header({ cartCount }) {
             </span>
           </Link>
 
-          <Link className="btn" to="/login">
-            {/* {userEmail ? "Account" : "Login"} */}
-          </Link>
+          <Link className="btn" to="/login"></Link>
         </nav>
       </div>
     </header>
