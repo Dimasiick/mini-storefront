@@ -5,14 +5,20 @@ import Catalog from "./pages/Catalog";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 
+const CART_KEY = "ministore_cart_v1";
+
 export default function App() {
   const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }, [cart]);
 
   const cartCount = useMemo(() => {
@@ -21,10 +27,12 @@ export default function App() {
 
   function addToCart(product) {
     setCart((prev) => {
-      const found = prev.find((x) => x.id === product.id);
+      const found = prev.find((i) => i.id === product.id);
       if (found) {
-        return prev.map((x) =>
-          x.id === product.id ? { ...x, quantity: x.quantity + 1 } : x,
+        return prev.map((i) =>
+          i.id === product.id
+            ? { ...i, quantity: Math.min(i.quantity + 1, 20) }
+            : i,
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -32,14 +40,17 @@ export default function App() {
   }
 
   function setQty(productId, quantity) {
-    const q = Math.max(1, Math.min(20, Number(quantity) || 1));
+    const q = Number(quantity);
+    if (!Number.isFinite(q)) return;
+    const safe = Math.max(1, Math.min(20, q));
+
     setCart((prev) =>
-      prev.map((x) => (x.id === productId ? { ...x, quantity: q } : x)),
+      prev.map((i) => (i.id === productId ? { ...i, quantity: safe } : i)),
     );
   }
 
   function removeFromCart(productId) {
-    setCart((prev) => prev.filter((x) => x.id !== productId));
+    setCart((prev) => prev.filter((i) => i.id !== productId));
   }
 
   function clearCart() {
@@ -52,10 +63,12 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Catalog onAddToCart={addToCart} />} />
+
         <Route
           path="/products/:id"
           element={<ProductDetail onAddToCart={addToCart} />}
         />
+
         <Route
           path="/cart"
           element={
@@ -67,6 +80,7 @@ export default function App() {
             />
           }
         />
+
         <Route
           path="*"
           element={
